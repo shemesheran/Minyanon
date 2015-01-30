@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/synagogue")
+@RequestMapping("/synagogues")
 public class SynagogueController {
 		
 	@Autowired
 	SynagogueRESTToEntityService synagogueService;
 	
-	@RequestMapping(value = "/getAllSynagogues", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public List<SynagogueREST> getAllSynagogues(
 			@RequestParam(value = "citiesNamesList") List<String> citiesNamesList) throws Exception {
 		return synagogueService.getAllSynagogues(citiesNamesList);
@@ -29,7 +29,7 @@ public class SynagogueController {
 		return null;
 	}
 	
-	@RequestMapping(value = "/deleteSynagogue", method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.POST)
 	public void deleteSynagogue(
 			@RequestParam(value = "synagogueName") String synagogueName,
 			@RequestParam(value = "cityName") String cityName) {

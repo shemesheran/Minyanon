@@ -20,6 +20,12 @@ class CityDAO extends GenericDAO<City> {
 	protected City getEntityWithAttachedDependencies(City city) {
 		return city;
 	}
+	
+	@Override
+	public void delete(City entity) {
+		sessionFactory.getCurrentSession().createQuery("Delete From City where name = :name")
+			.setParameter("name", entity.getName()).executeUpdate();
+	}
 
 
 

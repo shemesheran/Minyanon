@@ -28,7 +28,7 @@ public class PrayerRESTController extends GenericRESTController<PrayerREST>{
 	@Autowired
 	ArvitService arvitService;
 
-	@RequestMapping(value = "/getAllPrayers", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.GET)
 	public List<PrayerREST> getPrayers(
 			@RequestParam(value="prayerType", defaultValue="") List<String> prayerTypes,
 			@RequestParam(value="city", defaultValue="") List<String> cities,
@@ -41,7 +41,7 @@ public class PrayerRESTController extends GenericRESTController<PrayerREST>{
 		return list;
 	}
 	
-	@RequestMapping(value = "/addPrayer", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.PUT)
 	public void addPrayer(
 			@RequestParam(value="prayerType",required=true)String prayerType,
 			@RequestParam(value="cityName",required=true)String cityName,
@@ -50,7 +50,7 @@ public class PrayerRESTController extends GenericRESTController<PrayerREST>{
 		returnPrayerService(prayerType).newPrayer(cityName, synagogueName, date);
 	}
 		
-	@RequestMapping(value = "/deletePrayers", method=RequestMethod.GET)
+	@RequestMapping(method=RequestMethod.DELETE)
 	public void deletePrayers(
 			@RequestParam(value="prayerType",required=true)String prayerType,
 			@RequestParam(value="city",required=true)String city,

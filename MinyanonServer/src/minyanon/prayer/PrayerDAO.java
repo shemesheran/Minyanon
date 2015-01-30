@@ -67,4 +67,11 @@ public abstract class PrayerDAO<E extends Prayer> extends GenericDAO<E> {
 		return prayer;
 	}
 	
+	@Override
+	public void delete(E prayer) {
+		prayer = getEntityWithAttachedDependencies(prayer);
+//		sessionFactory.getCurrentSession().bycreateQuery("Delete From :prayerType where name = :name")
+//		.setParameter("name", prayer.getName()).executeUpdate();	
+	}
+	
 }

@@ -23,9 +23,7 @@ public abstract class GenericDAO<E extends Serializable> implements Initializing
 		sessionFactory.getCurrentSession().save(getEntityWithAttachedDependencies(entity));
 	}
 
-	public void delete(E entity) {
-		sessionFactory.getCurrentSession().delete(getEntityWithAttachedDependencies(entity));
-	}
+	public abstract void delete(E entity);
 
 	
 	/**
