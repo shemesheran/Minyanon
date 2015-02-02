@@ -43,4 +43,11 @@ class SynagogueDAO extends GenericDAO<Synagogue> {
 		return synagogue;
 	}
 
+
+	@Override
+	public void delete(Synagogue entity) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

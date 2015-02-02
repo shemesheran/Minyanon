@@ -23,9 +23,8 @@ public class CityController {
 	}
 	
 	@RequestMapping(value="/{cityName}", method=RequestMethod.PUT)
-	public String createCity(@PathVariable String cityName) {
+	public void createCity(@PathVariable String cityName) {
 		cityService.addNewCity(cityName);
-		return null;
 	}
 	
 	@RequestMapping(value="/{cityName}", method=RequestMethod.DELETE)

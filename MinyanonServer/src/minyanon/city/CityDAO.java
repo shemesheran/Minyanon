@@ -23,8 +23,6 @@ class CityDAO extends GenericDAO<City> {
 	
 	@Override
 	public void delete(City entity) {
-		sessionFactory.getCurrentSession().createQuery("Delete From City where name = :name")
-			.setParameter("name", entity.getName()).executeUpdate();
 	}
 
 
