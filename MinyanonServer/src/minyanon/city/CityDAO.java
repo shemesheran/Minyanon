@@ -20,11 +20,5 @@ class CityDAO extends GenericDAO<City> {
 	protected City getEntityWithAttachedDependencies(City city) {
 		return city;
 	}
-	
-	@Override
-	public void delete(City entity) {
-	}
-
-
 
 }

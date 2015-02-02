@@ -1,10 +1,6 @@
 package minyanon;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import minyanon.city.City;
 
@@ -16,10 +12,12 @@ public abstract class GenericDAO<E extends Serializable> {
 
 	protected final Class<E> type;
 
+	protected final String HQL_NaturalIDWhereClause;
 	
 	public GenericDAO(Class<E> type, SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 		this.type = type;
+		HQL_NaturalIDWhereClause = getNaturalIDWhereClause();
 	}
 
 	public void registerNew(E entity) {
@@ -27,56 +25,43 @@ public abstract class GenericDAO<E extends Serializable> {
 				getEntityWithAttachedDependencies(entity));
 	}
 
+	
 	public void delete(E entity){
-		String deleteHQL = "Delete From :entityType where";
-		StringBuilder whereClause = new StringBuilder();
-		Set<Entry<String, Object>> entrySet = getNaturalIDFieldValuePairs(entity).entrySet();
-		int size = entrySet.size();
-		for(Map.Entry<String, Object> fieldValuePair : entrySet){
-			whereClause.append(fieldValuePair.getKey());
-			whereClause.append("=");
-			whereClause.append(fieldValuePair.getValue());
-			if(--size != 0){
-				whereClause.append(" and ");
-			}
-		}
-		sessionFactory.getCurrentSession().createQuery(deleteHQL).executeUpdate();
-		
-//		Criteria deleteCriteria = sessionFactory.getCurrentSession().createCriteria(type);
-//		NaturalIdentifier naturalIdRestriction = Restrictions.naturalId();
-//		for(Map.Entry<String, Object> fieldValuePair : getNaturalIDFieldValuePair(entity).entrySet()){
-//			
-//		}
-//		deleteCriteria.add(naturalIdRestriction);
+		sessionFactory.getCurrentSession().createQuery("delete " + sessionFactory.getClassMetadata(type).getEntityName() +" "
+				+ HQL_NaturalIDWhereClause)
+				.setProperties(getEntityWithAttachedDependencies(entity))
+				.executeUpdate();
 	}
-
-	protected Map<String, Object> getNaturalIDFieldValuePairs(E entity) {
-
-		int[] naturalID_Indexes = sessionFactory.getClassMetadata(type)
-				.getNaturalIdentifierProperties();
-		String[] propsNames = sessionFactory.getClassMetadata(City.class)
-				.getPropertyNames();
-
-		Map<String, Object> naturalIDs = new HashMap<String, Object>();
-		for (int i = 0; i < naturalID_Indexes.length; i++) {
-			try {
-				String fieldName = propsNames[naturalID_Indexes[i]];
-				Object fieldValue = entity.getClass().getField(fieldName)
-						.get(entity);
-				naturalIDs.put(fieldName, fieldValue);
-			} catch (Exception e) {
-			}
-		}
-		return naturalIDs;
-	}
-
+	
 	/**
 	 * Getting the prayer entity and making its dependencies persistent
-	 * 
-	 * @param the
-	 *            Transient entity
+	 * @param the Transient entity
 	 * @return the prayer with a persistent dependencies
 	 */
 	protected abstract E getEntityWithAttachedDependencies(E entity);
 
+	/**
+	 * Get the HQL where clause composed by the natural ID fields only
+	 * @return The HQL natural ID where clause
+	 */
+	final protected String getNaturalIDWhereClause(){
+		StringBuilder HQL_WhereClause  = new StringBuilder("where "); 
+		int[] naturalID_Indexes = sessionFactory.getClassMetadata(type)
+				.getNaturalIdentifierProperties();
+		String[] propsNames = sessionFactory.getClassMetadata(City.class)
+				.getPropertyNames();
+		
+		int size = naturalID_Indexes.length;
+		for (int i = 0; i < naturalID_Indexes.length; i++) {
+			String fieldName = propsNames[naturalID_Indexes[i]];
+			HQL_WhereClause.append(fieldName);
+			HQL_WhereClause.append("=:");
+			HQL_WhereClause.append(fieldName);
+			if(--size != 0){
+				HQL_WhereClause.append(" and ");
+			}
+		}
+		return HQL_WhereClause.toString();
+	}
+	
 }

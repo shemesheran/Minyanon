@@ -28,10 +28,7 @@ public class City extends AbstractEntity implements Serializable{
 	
 	@OneToMany(mappedBy="city")
 	Set<Prayer> prayer;
-	
-	@NaturalId
-	public String g;
-	
+		
 	public City(){}
 	
 	public City(String name) {
