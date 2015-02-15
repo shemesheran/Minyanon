@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 
-import minyanon.city.City;
+import minyanon.address.Address;
 import minyanon.prayer.Prayer;
 import minyanon.synagogue.Synagogue;
 
@@ -17,8 +17,8 @@ public class Shaharit extends Prayer implements Serializable{
 	public Shaharit() {
 	}
 	
-	public Shaharit(City city, Synagogue synagogue, Date date) {
-		super(city, synagogue, date);
+	public Shaharit(Address address, Synagogue synagogue, Date date) {
+		super(address, synagogue, date);
 	}
 
 	@Override

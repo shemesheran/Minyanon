@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.transaction.Transactional;
 
-import minyanon.city.City;
+import minyanon.address.Address;
 import minyanon.prayer.AbstractPrayerService;
 import minyanon.synagogue.Synagogue;
 
@@ -16,14 +16,14 @@ public class ArvitService extends AbstractPrayerService<Arvit>{
 
 	@Override
 	@Transactional
-	public void newPrayer(String cityName, String synagogueName, String dateStr)
+	public void newPrayer(String addressesName, String synagogueName, String dateStr)
 			throws Exception {
 
-		City city = new City(cityName);
-		Synagogue synagogue = new Synagogue(synagogueName,city);
+		Address address = new Address(addressesName);
+		Synagogue synagogue = new Synagogue(synagogueName,address);
 		Date date = dateFormatter.parse(dateStr);
 		
-		prayerDao.registerNew(new Arvit(city, synagogue, date));
+		prayerDao.registerNew(new Arvit(address, synagogue, date));
 	}
 
 }

@@ -5,8 +5,8 @@ import minyanon.prayer.PrayerREST;
 
 public class MinchaPrayerREST extends PrayerREST{
 
-	public MinchaPrayerREST(String city, String synagogue, String date) {
-		super("Mincha", city, synagogue, date);
+	public MinchaPrayerREST(String address, String synagogue, String date) {
+		super("Mincha", address, synagogue, date);
 	}
 
 }

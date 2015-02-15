@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import minyanon.AbstractEntity;
-import minyanon.city.City;
+import minyanon.address.Address;
 import minyanon.synagogue.Synagogue;
 
 import org.hibernate.annotations.NaturalId;
@@ -42,7 +42,7 @@ public abstract class Prayer extends AbstractEntity implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="city_FK")
-	protected City city;
+	protected Address city;
 	
 	@NaturalId
 	@NotNull
@@ -56,7 +56,7 @@ public abstract class Prayer extends AbstractEntity implements Serializable{
 		
 	public Prayer() {}
 	
-	public Prayer(City city, Synagogue synagogue, Date date) {
+	public Prayer(Address city, Synagogue synagogue, Date date) {
 		this.city = city;
 		this.synagogue = synagogue;
 		this.date = date;
@@ -70,11 +70,11 @@ public abstract class Prayer extends AbstractEntity implements Serializable{
 		return id;
 	}
 	
-	public City getCity() {
+	public Address getCity() {
 		return city;
 	}
 	
-	public void setCity(City city) {
+	public void setCity(Address city) {
 		this.city = city;
 	}
 	

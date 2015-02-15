@@ -8,7 +8,8 @@ import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
-import minyanon.city.City;
+
+import minyanon.address.Address;
 
 class SynagogueDAO extends GenericDAO<Synagogue> {
 
@@ -38,8 +39,8 @@ class SynagogueDAO extends GenericDAO<Synagogue> {
 
 	@Override
 	protected Synagogue getEntityWithAttachedDependencies(Synagogue synagogue) {
-		City cityFromDB = (City) sessionFactory.getCurrentSession().byNaturalId(City.class).using("name", synagogue.getCity().getName()).getReference();
-		synagogue.setCity(cityFromDB);
+		Address addressFromDB = (Address) sessionFactory.getCurrentSession().byNaturalId(Address.class).using("name", synagogue.getAddress().getName()).getReference();
+		synagogue.setCity(addressFromDB);
 		return synagogue;
 	}
 

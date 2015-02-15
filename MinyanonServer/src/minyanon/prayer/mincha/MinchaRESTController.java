@@ -20,7 +20,7 @@ public class MinchaRESTController{
 	
 	@RequestMapping(value = "/getAllPrayers", method=RequestMethod.GET)
 	public List<PrayerREST> getPrayers(
-			@RequestParam(value="city") List<String> cities,
+			@RequestParam(value="addresses") List<String> cities,
 			@RequestParam(value="fromDate") List<String[]> datesRanges,
 			@RequestParam(value="synagogue") List<String> prayerStyles) throws Exception {
 		return minchaService.getAllPrayers(cities, datesRanges, prayerStyles);

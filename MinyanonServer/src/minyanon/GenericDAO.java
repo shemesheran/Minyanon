@@ -2,7 +2,7 @@ package minyanon;
 
 import java.io.Serializable;
 
-import minyanon.city.City;
+import minyanon.address.Address;
 
 import org.hibernate.SessionFactory;
 
@@ -48,7 +48,7 @@ public abstract class GenericDAO<E extends Serializable> {
 		StringBuilder HQL_WhereClause  = new StringBuilder("where "); 
 		int[] naturalID_Indexes = sessionFactory.getClassMetadata(type)
 				.getNaturalIdentifierProperties();
-		String[] propsNames = sessionFactory.getClassMetadata(City.class)
+		String[] propsNames = sessionFactory.getClassMetadata(Address.class)
 				.getPropertyNames();
 		
 		int size = naturalID_Indexes.length;

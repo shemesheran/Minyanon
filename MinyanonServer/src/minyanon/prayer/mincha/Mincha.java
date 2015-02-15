@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 
-import minyanon.city.City;
+import minyanon.address.Address;
 import minyanon.prayer.Prayer;
 import minyanon.synagogue.Synagogue;
 
@@ -17,8 +17,8 @@ public class Mincha extends Prayer implements Serializable{
 	public Mincha() {
 	}
 	
-	public Mincha(City city, Synagogue synagogue, Date date) {
-		super(city, synagogue, date);
+	public Mincha(Address address, Synagogue synagogue, Date date) {
+		super(address, synagogue, date);
 	}
 	
 	@Override

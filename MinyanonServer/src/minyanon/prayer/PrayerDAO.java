@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import minyanon.GenericDAO;
-import minyanon.city.City;
+import minyanon.address.Address;
 import minyanon.synagogue.Synagogue;
 
 import org.hibernate.Criteria;
@@ -57,7 +57,7 @@ public abstract class PrayerDAO<E extends Prayer> extends GenericDAO<E> {
 		
 	@Override
 	protected E getEntityWithAttachedDependencies(E prayer){
-		City cityFromDB = (City) sessionFactory.getCurrentSession().byNaturalId(City.class)
+		Address cityFromDB = (Address) sessionFactory.getCurrentSession().byNaturalId(Address.class)
 				.using("name", prayer.getCity().getName()).load();
 		Synagogue synagogueCityFromDB = (Synagogue) sessionFactory.getCurrentSession().byNaturalId(Synagogue.class)
 				.using("name", prayer.getSynagogue().getName())

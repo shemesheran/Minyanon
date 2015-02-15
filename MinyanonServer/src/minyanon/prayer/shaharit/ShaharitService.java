@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.transaction.Transactional;
 
-import minyanon.city.City;
+import minyanon.address.Address;
 import minyanon.prayer.AbstractPrayerService;
 import minyanon.synagogue.Synagogue;
 
@@ -19,7 +19,7 @@ public class ShaharitService extends AbstractPrayerService<Shaharit>{
 		public void newPrayer(String cityName, String synagogueName, String dateStr)
 				throws Exception {
 			
-			City city = new City(cityName);
+			Address city = new Address(cityName);
 			Synagogue synagogue = new Synagogue(synagogueName,city);
 			Date date = dateFormatter.parse(dateStr);
 			

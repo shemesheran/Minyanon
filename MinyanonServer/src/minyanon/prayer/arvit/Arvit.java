@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 
-import minyanon.city.City;
+import minyanon.address.Address;
 import minyanon.prayer.Prayer;
 import minyanon.synagogue.Synagogue;
 
@@ -17,8 +17,8 @@ public class Arvit extends Prayer implements Serializable{
 	public Arvit() {
 	}
 	
-	public Arvit(City city, Synagogue synagogue, Date date) {
-		super(city, synagogue, date);
+	public Arvit(Address address, Synagogue synagogue, Date date) {
+		super(address, synagogue, date);
 	}
 
 	@Override

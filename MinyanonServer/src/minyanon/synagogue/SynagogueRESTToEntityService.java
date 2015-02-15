@@ -6,7 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import minyanon.RESTToEntityService;
-import minyanon.city.City;
+import minyanon.address.Address;
 
 public class SynagogueRESTToEntityService extends RESTToEntityService<SynagogueREST, Synagogue>{
 
@@ -27,12 +27,12 @@ public class SynagogueRESTToEntityService extends RESTToEntityService<SynagogueR
 	
 	@Transactional
 	public void addNewSynagogue(String synagogueName, String cityName){
-		synagogueDao.registerNew(new Synagogue(synagogueName, new City(cityName)));
+		synagogueDao.registerNew(new Synagogue(synagogueName, new Address(cityName)));
 	}
 	
 	@Transactional
 	public void deleteSynagogue(String synagogueName, String cityName){
-		synagogueDao.delete(new Synagogue(synagogueName, new City(cityName)));
+		synagogueDao.delete(new Synagogue(synagogueName, new Address(cityName)));
 	}
 
 }

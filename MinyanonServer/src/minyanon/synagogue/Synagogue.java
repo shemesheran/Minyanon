@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import minyanon.AbstractEntity;
-import minyanon.city.City;
+import minyanon.address.Address;
 import minyanon.prayer.Prayer;
 
 import org.hibernate.annotations.NaturalId;
@@ -24,18 +24,18 @@ public class Synagogue extends AbstractEntity implements Serializable{
 	protected String name;
 	
 	@ManyToOne
-	@JoinColumn(name="city_FK")
+	@JoinColumn(name="address_FK")
 	@NaturalId
-	protected City city;
+	protected Address address;
 
 	@OneToMany(mappedBy="synagogue")
 	protected Set<Prayer> prayers;
 	
 	public Synagogue() {}
 	
-	public Synagogue(String name, City city) {
+	public Synagogue(String name, Address address) {
 		this.name = name;
-		this.city = city;
+		this.address = address;
 	}
 	
 	public void setId(long id) {
@@ -54,12 +54,12 @@ public class Synagogue extends AbstractEntity implements Serializable{
 		this.name = name;
 	}
 
-	public City getCity() {
-		return city;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setCity(City city) {
-		this.city = city;
+	public void setCity(Address address) {
+		this.address = address;
 	}
 
 	public Set<Prayer> getPrayer() {
