@@ -81,13 +81,19 @@ public class DatesTesting {
 		  }
 		  
 		  
+		  public static void getEngName(){
+				JsonNode result = restTemplate.getForObject("https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={myKey}", JsonNode.class, "אריאל שרון אור יהודה", "AIzaSyCuN-gakCi1sQnCimos09VP1sLyHw9zcFc");
+//				https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=API_KEY
+		  }
+		  
 		  public static double getAltLong() {
 			JsonNode result = restTemplate.getForObject("https://maps.googleapis.com/maps/api/elevation/json?locations={latitutd},{longtitude}&key={myKey}", JsonNode.class, "32.016553", "34.8369391","AIzaSyCuN-gakCi1sQnCimos09VP1sLyHw9zcFc");
 			return result.findValue("elevation").asDouble();
 		  }
 		  
 		  public static void main(String[] args) throws IOException  {
-			  System.out.println(getAltLong());
+//			  System.out.println(getAltLong());
+			  getEngName();
 		  }
 
 	
