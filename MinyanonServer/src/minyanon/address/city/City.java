@@ -1,21 +1,27 @@
 package minyanon.address.city;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+
+import minyanon.AbstractEntity;
 
 import org.hibernate.annotations.NaturalId;
 
-@Embeddable
-public class City {
+@Entity
+public class City extends AbstractEntity implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@NaturalId
 	String name;
 	
-	@ElementCollection
+	@ElementCollection(fetch=FetchType.LAZY)
 	@CollectionTable(name="Cities_Aliases")
 	Set<String> cityAliases;
 	

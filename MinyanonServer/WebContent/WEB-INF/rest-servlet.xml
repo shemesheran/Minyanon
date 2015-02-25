@@ -64,7 +64,12 @@
 				<constructor-arg name="sessionFactory" ref="sessionFactory"/>
 			</bean>
 		</constructor-arg>
-	</bean>	
+		<constructor-arg name="cityDao">
+			<bean class="minyanon.address.city.CityDAO">
+				<constructor-arg name="sessionFactory" ref="sessionFactory"/>
+			</bean>
+		</constructor-arg>
+	</bean>
 	
 	
 	<bean class="minyanon.prayer.shaharit.ShaharitService">

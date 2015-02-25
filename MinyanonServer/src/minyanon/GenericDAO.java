@@ -34,7 +34,7 @@ public abstract class GenericDAO<E extends Serializable> {
 	}
 	
 	/**
-	 * Getting the prayer entity and making its dependencies persistent
+	 * Getting an entity and making its dependencies persistent
 	 * @param the Transient entity
 	 * @return the prayer with a persistent dependencies
 	 */

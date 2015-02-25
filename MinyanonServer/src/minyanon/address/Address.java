@@ -1,33 +1,19 @@
 package minyanon.address;
 
 import java.io.Serializable;
-import java.util.Set;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
+import javax.persistence.ManyToOne;
 
-import minyanon.AbstractEntity;
 import minyanon.address.city.City;
-import minyanon.prayer.Prayer;
-import minyanon.synagogue.Synagogue;
-
-import org.hibernate.annotations.NaturalId;
-import org.hibernate.validator.constraints.NotBlank;
 
 @Embeddable
 public class Address implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@Embedded
-	@AttributeOverride(name="name", column = @Column(name="cityName"))
-	City city;
+	@ManyToOne
+	private City city;
 	
 	private String streetName;
 	
