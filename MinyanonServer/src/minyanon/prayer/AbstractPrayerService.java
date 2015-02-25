@@ -10,6 +10,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import minyanon.RESTToEntityService;
+import minyanon.synagogue.SynagogueREST;
 
 public abstract class AbstractPrayerService<E extends Prayer> extends RESTToEntityService<PrayerREST, E>{
 
@@ -35,7 +36,7 @@ public abstract class AbstractPrayerService<E extends Prayer> extends RESTToEnti
 		
 		List<PrayerREST> prayerRESTList = new LinkedList<PrayerREST>();
 		for(E prayer : prayersList){
-			prayerRESTList.add(convertPrayerToRest(prayer));
+			prayerRESTList.add(new PrayerREST(prayer));
 		}
 		
 		return prayerRESTList;
@@ -43,13 +44,6 @@ public abstract class AbstractPrayerService<E extends Prayer> extends RESTToEnti
 
 	public abstract void newPrayer(String cityName, String synagogueName, String dateStr) throws Exception;
 		
-	protected PrayerREST convertPrayerToRest(Prayer entity){
-		return new PrayerREST(entity.getPrayerType().toString(), 
-		entity.getCity().getName(), 
-		entity.getSynagogue().getName(), 
-		entity.getDate().toString());
-	}
-
 	private List<Prayer.PrayerStyle> prayerStylesStrToEnum(List<String> prayerStyles) {
 		List<Prayer.PrayerStyle> prayerStylesEnum = new LinkedList<Prayer.PrayerStyle>();
 		for(String prayerStyleStr : prayerStyles){

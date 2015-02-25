@@ -1,12 +1,13 @@
 package minyanon.prayer.arvit;
 
 import minyanon.prayer.PrayerREST;
+import minyanon.synagogue.SynagogueREST;
 
 
 public class ArvitPrayerREST extends PrayerREST{
 
-	public ArvitPrayerREST(String prayerType, String address, String synagogue, String date) {
-		super("Arvit", address, synagogue, date);
+	public ArvitPrayerREST(String prayerType, SynagogueREST synagogue) {
+		super("Arvit", synagogue);
 	}
 
 }

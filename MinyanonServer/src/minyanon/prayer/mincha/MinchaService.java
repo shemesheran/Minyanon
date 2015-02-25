@@ -17,14 +17,14 @@ public class MinchaService extends AbstractPrayerService<Mincha>{
 
 	@Override
 	@Transactional
-	public void newPrayer(String addressName, String synagogueName, String dateStr)
+	public void newPrayer(String cityName, String synagogueName, String dateStr)
 			throws Exception {
 		
-		Address address = new Address(addressName);
+		Address address = new Address(cityName);
 		Synagogue synagogue = new Synagogue(synagogueName,address);
 		Date date = dateFormatter.parse(dateStr);
 		
-		prayerDao.registerNew(new Mincha(address, synagogue, date));
+		prayerDao.registerNew(new Mincha(synagogue, date));
 	}
 
 }

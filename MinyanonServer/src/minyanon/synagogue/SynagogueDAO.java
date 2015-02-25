@@ -2,6 +2,8 @@ package minyanon.synagogue;
 
 import java.util.List;
 
+import javax.persistence.EntityExistsException;
+
 import minyanon.GenericDAO;
 
 import org.hibernate.Criteria;
@@ -10,6 +12,7 @@ import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
 
 import minyanon.address.Address;
+import minyanon.address.city.City;
 
 class SynagogueDAO extends GenericDAO<Synagogue> {
 
@@ -34,13 +37,13 @@ class SynagogueDAO extends GenericDAO<Synagogue> {
 		synagoguesCriteria.add(cityDisjunction);
 		
 		return synagoguesCriteria.list();
-
 	}
 
 	@Override
 	protected Synagogue getEntityWithAttachedDependencies(Synagogue synagogue) {
-		Address addressFromDB = (Address) sessionFactory.getCurrentSession().byNaturalId(Address.class).using("name", synagogue.getAddress().getName()).getReference();
-		synagogue.setCity(addressFromDB);
+//		Address addressFromDB = (Address) sessionFactory.getCurrentSession().
+//				byNaturalId(Address.class).using("name", synagogue.getAddress().getName()).getReference();
+//		synagogue.setCity(addressFromDB);
 		return synagogue;
 	}
 
@@ -50,5 +53,5 @@ class SynagogueDAO extends GenericDAO<Synagogue> {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 }

@@ -3,50 +3,60 @@ package minyanon.address;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import minyanon.AbstractEntity;
+import minyanon.address.city.City;
 import minyanon.prayer.Prayer;
 import minyanon.synagogue.Synagogue;
 
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.NotBlank;
 
-@Entity
-public class Address extends AbstractEntity implements Serializable{
+@Embeddable
+public class Address implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@NotBlank
-	@NaturalId
-	private String cityName;
+	@Embedded
+	@AttributeOverride(name="name", column = @Column(name="cityName"))
+	City city;
 	
-	@NaturalId
 	private String streetName;
 	
-	@NaturalId
 	private String streetNumber;
 	
 	private double latitude;
 	
 	private double longtitude;
 	
-	public Address(){}
+	public Address() {}
 	
-	public Address(String cityName, String streetName, String streetNumber) {
-		this.cityName = cityName;
+	public Address(String cityName){
+		this.city = new City(cityName);
+	}
+	
+	public Address(String cityName, String streetName, String streetNumber, double latitude, double longtitude) {
+		city = new City(cityName);
 		this.streetName = streetName;
 		this.streetNumber = streetNumber;
+		this.latitude = latitude;
+		this.longtitude = longtitude;
 	}
 	
-	public String getCityName() {
-		return cityName;
+	public City getCity() {
+		return city;
 	}
 	
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
+	public void setCity(City city) {
+		this.city = city;
 	}
 	
 	public String getStreetName() {

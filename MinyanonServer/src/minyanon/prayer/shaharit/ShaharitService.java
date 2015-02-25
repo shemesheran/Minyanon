@@ -19,11 +19,11 @@ public class ShaharitService extends AbstractPrayerService<Shaharit>{
 		public void newPrayer(String cityName, String synagogueName, String dateStr)
 				throws Exception {
 			
-			Address city = new Address(cityName);
-			Synagogue synagogue = new Synagogue(synagogueName,city);
+			Address address = new Address(cityName);
+			Synagogue synagogue = new Synagogue(synagogueName,address);
 			Date date = dateFormatter.parse(dateStr);
 			
-			prayerDao.registerNew(new Shaharit(city, synagogue, date));
+			prayerDao.registerNew(new Shaharit(synagogue, date));
 		}
 		
 	}

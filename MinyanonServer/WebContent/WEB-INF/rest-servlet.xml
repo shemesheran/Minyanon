@@ -50,13 +50,13 @@
 	
 	
 	
-	<bean class="minyanon.city.CityRESTToEntityService">
-		<constructor-arg name="cityDao">
-			<bean class="minyanon.city.CityDAO">
-				<constructor-arg name="sessionFactory" ref="sessionFactory"/>
-			</bean>
-		</constructor-arg>
-	</bean>	
+<!-- 	<bean class="minyanon.city.CityRESTToEntityService"> -->
+<!-- 		<constructor-arg name="cityDao"> -->
+<!-- 			<bean class="minyanon.city.CityDAO"> -->
+<!-- 				<constructor-arg name="sessionFactory" ref="sessionFactory"/> -->
+<!-- 			</bean> -->
+<!-- 		</constructor-arg> -->
+<!-- 	</bean>	 -->
 	
 	<bean class="minyanon.synagogue.SynagogueRESTToEntityService">
 		<constructor-arg name="synagogueDao">

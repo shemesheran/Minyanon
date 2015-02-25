@@ -1,16 +1,16 @@
 package minyanon.address;
 
-import minyanon.AbstractREST;
+public class AddressREST {
 
-public class AddressREST extends AbstractREST{
+	public String cityName;
 	
-	private String name;
+	public String streetName;
 	
-	public AddressREST(String name) {
-		this.name = name;
-	}
+	public String streetNumber;
 
-	public String getName() {
-		return name;
+	public AddressREST(Address address){
+		this.cityName = address.getCity().getName();
+		this.streetName = address.getStreetName();
+		this.streetNumber = address.getStreetNumber();
 	}
 }

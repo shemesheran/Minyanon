@@ -48,7 +48,7 @@ public abstract class GenericDAO<E extends Serializable> {
 		StringBuilder HQL_WhereClause  = new StringBuilder("where "); 
 		int[] naturalID_Indexes = sessionFactory.getClassMetadata(type)
 				.getNaturalIdentifierProperties();
-		String[] propsNames = sessionFactory.getClassMetadata(Address.class)
+		String[] propsNames = sessionFactory.getClassMetadata(type)
 				.getPropertyNames();
 		
 		int size = naturalID_Indexes.length;

@@ -4,6 +4,10 @@ package minyanon.synagogue;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,9 +27,7 @@ public class Synagogue extends AbstractEntity implements Serializable{
 	@NaturalId
 	protected String name;
 	
-	@ManyToOne
-	@JoinColumn(name="address_FK")
-	@NaturalId
+	@Embedded
 	protected Address address;
 
 	@OneToMany(mappedBy="synagogue")

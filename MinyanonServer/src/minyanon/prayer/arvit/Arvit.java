@@ -17,8 +17,8 @@ public class Arvit extends Prayer implements Serializable{
 	public Arvit() {
 	}
 	
-	public Arvit(Address address, Synagogue synagogue, Date date) {
-		super(address, synagogue, date);
+	public Arvit(Synagogue synagogue, Date date) {
+		super(synagogue, date);
 	}
 
 	@Override

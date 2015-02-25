@@ -21,19 +21,19 @@ public class SynagogueController {
 		return synagogueService.getAllSynagogues(citiesNamesList);
 	}
 	
-	@RequestMapping(value = "/registerNewSynagogue", method=RequestMethod.POST)
+	@RequestMapping(value = "/registerNewSynagogue", method=RequestMethod.PUT)
 	public String createSynagogue(
 			@RequestParam(value = "synagogueName") String synagogueName,
-			@RequestParam(value = "cityName") String cityName) {
-		synagogueService.addNewSynagogue(synagogueName, cityName);
+			@RequestParam(value = "address") String address) {
+		synagogueService.addNewSynagogue(synagogueName, address);
 		return null;
 	}
 	
-	@RequestMapping(method=RequestMethod.POST)
+	@RequestMapping(method=RequestMethod.PUT)
 	public void deleteSynagogue(
 			@RequestParam(value = "synagogueName") String synagogueName,
-			@RequestParam(value = "cityName") String cityName) {
-		synagogueService.deleteSynagogue(synagogueName, cityName);
+			@RequestParam(value = "address") String address) {
+		synagogueService.deleteSynagogue(synagogueName, address);
 	}
 
 }

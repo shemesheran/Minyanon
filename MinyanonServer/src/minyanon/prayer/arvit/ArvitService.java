@@ -16,14 +16,14 @@ public class ArvitService extends AbstractPrayerService<Arvit>{
 
 	@Override
 	@Transactional
-	public void newPrayer(String addressesName, String synagogueName, String dateStr)
+	public void newPrayer(String cityName, String synagogueName, String dateStr)
 			throws Exception {
-
-		Address address = new Address(addressesName);
+		
+		Address address = new Address(cityName);
 		Synagogue synagogue = new Synagogue(synagogueName,address);
 		Date date = dateFormatter.parse(dateStr);
 		
-		prayerDao.registerNew(new Arvit(address, synagogue, date));
+		prayerDao.registerNew(new Arvit(synagogue, date));
 	}
 
 }

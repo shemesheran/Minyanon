@@ -17,8 +17,8 @@ public class Shaharit extends Prayer implements Serializable{
 	public Shaharit() {
 	}
 	
-	public Shaharit(Address address, Synagogue synagogue, Date date) {
-		super(address, synagogue, date);
+	public Shaharit(Synagogue synagogue, Date date) {
+		super(synagogue, date);
 	}
 
 	@Override

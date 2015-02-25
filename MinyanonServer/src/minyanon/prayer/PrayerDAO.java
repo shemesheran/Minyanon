@@ -57,12 +57,8 @@ public abstract class PrayerDAO<E extends Prayer> extends GenericDAO<E> {
 		
 	@Override
 	protected E getEntityWithAttachedDependencies(E prayer){
-		Address cityFromDB = (Address) sessionFactory.getCurrentSession().byNaturalId(Address.class)
-				.using("name", prayer.getCity().getName()).load();
 		Synagogue synagogueCityFromDB = (Synagogue) sessionFactory.getCurrentSession().byNaturalId(Synagogue.class)
-				.using("name", prayer.getSynagogue().getName())
-				.using("city", cityFromDB).load();
-		prayer.setCity(cityFromDB);
+				.using("name", prayer.getSynagogue().getName());
 		prayer.setSynagogue(synagogueCityFromDB);
 		return prayer;
 	}

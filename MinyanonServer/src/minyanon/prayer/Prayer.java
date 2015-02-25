@@ -40,10 +40,6 @@ public abstract class Prayer extends AbstractEntity implements Serializable{
 		SFARAD, ASHKENAZ
 	}
 	
-	@ManyToOne
-	@JoinColumn(name="city_FK")
-	protected Address city;
-	
 	@NaturalId
 	@NotNull
 	@ManyToOne
@@ -56,8 +52,7 @@ public abstract class Prayer extends AbstractEntity implements Serializable{
 		
 	public Prayer() {}
 	
-	public Prayer(Address city, Synagogue synagogue, Date date) {
-		this.city = city;
+	public Prayer(Synagogue synagogue, Date date) {
 		this.synagogue = synagogue;
 		this.date = date;
 	}
@@ -69,15 +64,7 @@ public abstract class Prayer extends AbstractEntity implements Serializable{
 	public long getId() {
 		return id;
 	}
-	
-	public Address getCity() {
-		return city;
-	}
-	
-	public void setCity(Address city) {
-		this.city = city;
-	}
-	
+		
 	public Synagogue getSynagogue() {
 		return synagogue;
 	}

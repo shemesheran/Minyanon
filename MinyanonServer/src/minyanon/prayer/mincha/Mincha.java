@@ -17,8 +17,8 @@ public class Mincha extends Prayer implements Serializable{
 	public Mincha() {
 	}
 	
-	public Mincha(Address address, Synagogue synagogue, Date date) {
-		super(address, synagogue, date);
+	public Mincha(Synagogue synagogue, Date date) {
+		super(synagogue, date);
 	}
 	
 	@Override
