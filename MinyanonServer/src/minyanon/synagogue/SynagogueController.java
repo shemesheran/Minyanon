@@ -15,11 +15,6 @@ public class SynagogueController {
 	@Autowired
 	SynagogueRESTToEntityService synagogueService;
 	
-	@RequestMapping(method=RequestMethod.GET)
-	public List<SynagogueREST> getAllSynagogues(
-			@RequestParam(value = "citiesNamesList") List<String> citiesNamesList) throws Exception {
-		return synagogueService.getAllSynagogues(citiesNamesList);
-	}
 	
 	@RequestMapping(value = "/registerNewSynagogue", method=RequestMethod.PUT)
 	public String createSynagogue(

@@ -33,6 +33,15 @@ public abstract class GenericDAO<E extends Serializable> {
 				.executeUpdate();
 	}
 	
+	@SuppressWarnings("unchecked")
+	//Not worrying about few results, I trust Hibernate's natural ID
+	public E getOne(E entity){
+		return (E) sessionFactory.getCurrentSession().createQuery("from " + sessionFactory.getClassMetadata(type).getEntityName() +" "
+				+ HQL_NaturalIDWhereClause)
+				.setProperties(getEntityWithAttachedDependencies(entity))
+				.uniqueResult();
+	}
+	
 	/**
 	 * Getting an entity and making its dependencies persistent
 	 * @param the Transient entity

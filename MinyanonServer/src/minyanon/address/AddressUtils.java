@@ -23,6 +23,8 @@ public class AddressUtils {
 	}
 
 	private static Address createNewAddress(JsonNode resultFromGoogle) {
+		//TODO Check if the results were empty
+		
 		JsonNode addressComponent = resultFromGoogle.get("results").get(0).get("address_components");
 		JsonNode geometryComponent = resultFromGoogle.get("results").get(0).get("geometry");
 

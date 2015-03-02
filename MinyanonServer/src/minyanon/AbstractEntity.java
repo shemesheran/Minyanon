@@ -13,6 +13,8 @@ public abstract class AbstractEntity{
 	@GeneratedValue(strategy = IDENTITY) 
 	protected long id;
 	
+	
+	
 	public void setId(long id) {
 		this.id = id;
 	}

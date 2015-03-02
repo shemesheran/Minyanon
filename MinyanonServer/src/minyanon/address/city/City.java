@@ -23,7 +23,7 @@ public class City extends AbstractEntity implements Serializable{
 	
 	@ElementCollection(fetch=FetchType.LAZY)
 	@CollectionTable(name="Cities_Aliases")
-	Set<String> cityAliases;
+	private Set<String> cityAliases;
 	
 	public City() {}
 	
@@ -36,8 +36,16 @@ public class City extends AbstractEntity implements Serializable{
 		return name;
 	}
 	
+	public Set<String> getCityAliases() {
+		return cityAliases;
+	}
+	
+	public void setCityAliases(Set<String> cityAliases) {
+		this.cityAliases = cityAliases;
+	}
+	
 	public void addCityAlias(String cityAlias){
-		this.cityAliases.add(cityAlias);
+		this.getCityAliases().add(cityAlias);
 	}
 
 }
