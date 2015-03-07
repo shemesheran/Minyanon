@@ -16,19 +16,33 @@ public class SynagogueController {
 	SynagogueRESTToEntityService synagogueService;
 	
 	
-	@RequestMapping(value = "/registerNewSynagogue", method=RequestMethod.PUT)
-	public String createSynagogue(
+	@RequestMapping(method=RequestMethod.PUT)
+	public void createSynagogue(
 			@RequestParam(value = "synagogueName") String synagogueName,
 			@RequestParam(value = "address") String address) {
 		synagogueService.addNewSynagogue(synagogueName, address);
-		return null;
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT)
+	@RequestMapping(method=RequestMethod.GET)
+	public SynagogueREST getSynagogue(
+			@RequestParam(value = "synagogueName") String synagogueName,
+			@RequestParam(value = "city") String city){
+		return synagogueService.getSynagogue(synagogueName, city);
+	}
+	
+//	@RequestMapping(method=RequestMethod.GET)
+//	public List<SynagogueREST> getSynagogue(
+//			@RequestParam(value = "location") int location,
+//			@RequestParam(value = "radius") int raduis){
+//		return synagogueService.getSynagoguesInArea(location, raduis);
+//	}
+
+	
+	@RequestMapping(method=RequestMethod.DELETE)
 	public void deleteSynagogue(
 			@RequestParam(value = "synagogueName") String synagogueName,
-			@RequestParam(value = "address") String address) {
-		synagogueService.deleteSynagogue(synagogueName, address);
+			@RequestParam(value = "city") String city) {
+		synagogueService.deleteSynagogue(synagogueName, city);
 	}
 
 }

@@ -1,6 +1,7 @@
 package minyanon.address;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.web.client.RestTemplate;
 
@@ -23,14 +24,33 @@ public class AddressUtils {
 	}
 
 	private static Address createNewAddress(JsonNode resultFromGoogle) {
-		//TODO Check if the results were empty
+		if(resultFromGoogle.get("status").asText().equals("ZERO_RESULTS")){
+			return null;
+		}
 		
 		JsonNode addressComponent = resultFromGoogle.get("results").get(0).get("address_components");
 		JsonNode geometryComponent = resultFromGoogle.get("results").get(0).get("geometry");
+		String streetNumber = null;
+		String streetName = null;
+		String cityName = null;
+		for(JsonNode addressType : addressComponent){
+			if(addressType.get("types").get(0).asText().equals("street_number")){
+				streetNumber = addressType.get("long_name").toString();
+				continue;
+			}
+			else if(addressType.get("types").get(0).asText().equals("route")){
+				streetName = addressType.get("long_name").toString();
+				continue;
 
-		String cityName = addressComponent.get(2).get("long_name").toString();
-		String streetName = addressComponent.get(1).get("long_name").toString();
-		String streetNumber = addressComponent.get(0).get("long_name").toString();
+			}
+			else if(addressType.get("types").get(0).asText().equals("locality")){
+				cityName = addressType.get("long_name").toString();
+				continue;
+
+			}
+			
+		}
+		
 		double latitude = geometryComponent.findValue("lat").asDouble();
 		double longtitude = geometryComponent.findValue("lng").asDouble();
 		return new Address(cityName,

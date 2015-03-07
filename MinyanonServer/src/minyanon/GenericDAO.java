@@ -17,7 +17,7 @@ public abstract class GenericDAO<E extends Serializable> {
 	public GenericDAO(Class<E> type, SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 		this.type = type;
-		HQL_NaturalIDWhereClause = getNaturalIDWhereClause();
+		HQL_NaturalIDWhereClause = createNaturalIDWhereClause();
 	}
 
 	public void registerNew(E entity) {
@@ -53,7 +53,7 @@ public abstract class GenericDAO<E extends Serializable> {
 	 * Get the HQL where clause composed by the natural ID fields only
 	 * @return The HQL natural ID where clause
 	 */
-	final protected String getNaturalIDWhereClause(){
+	final protected String createNaturalIDWhereClause(){
 		StringBuilder HQL_WhereClause  = new StringBuilder("where "); 
 		int[] naturalID_Indexes = sessionFactory.getClassMetadata(type)
 				.getNaturalIdentifierProperties();
