@@ -10,12 +10,14 @@ import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 
 import minyanon.address.Address;
 import minyanon.address.AddressUtils;
+import minyanon.address.BadAddressException;
 import minyanon.address.city.City;
 
-class SynagogueDAO extends GenericDAO<Synagogue> {
+class SynagogueDAO extends GenericDAO<Synagogue>{
 
 	private CityDAO cityDao;
 	
@@ -29,13 +31,13 @@ class SynagogueDAO extends GenericDAO<Synagogue> {
 	}
 
 	@SuppressWarnings("unchecked")
-	List<Synagogue> getSynagoguesInArea(int location, int radius) {
-		return (List<Synagogue>)sessionFactory.getCurrentSession().createCriteria(Synagogue.class, "synagogue")
-		.createAlias("synagogue.address", "address")
-		.createAlias("address.latitude", "latitude")
-		.createAlias("address.longtitude", "longtitude")
-		.add(Restrictions.lt("latitude*latitude + longtitude*longtitude", radius*radius))
-		.list();	
+	List<Synagogue> getSynagoguesInArea(double latitude, double longtitude, int radius) {
+		return (List<Synagogue>)sessionFactory.getCurrentSession()
+				.createSQLQuery("call geodist(:latitude ,:longtitude, :dist)")
+				.setParameter("latitude", latitude)
+				.setParameter("longtitude", longtitude)
+				.setParameter("dist", radius)
+				.list();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -78,17 +80,15 @@ class SynagogueDAO extends GenericDAO<Synagogue> {
 			}
 			
 			//Checking with google if this city name is an alias. if so, save it as alias
-			Address addressFromGoogle = AddressUtils.getAddressFromGoogle(givenCityName); 
-			if(addressFromGoogle != null){
-				//TODO What if I was given a city that I still dont have in the DB?
-				//Maybe throw exception if real city from google is not known yet, or null.
+			Address addressFromGoogle;
+			addressFromGoogle = AddressUtils.getAddressFromGoogle(givenCityName);
+			if(addressFromGoogle != null && addressFromGoogle.getCity() != null){
 				addCityAlias(addressFromGoogle.getCity(), givenCityName);
 				return addressFromGoogle.getCity();
 			}
 			else{
 				return null;
 			}
-			
 		}
 
 		private City getCityByAlias(String name) {
@@ -101,8 +101,6 @@ class SynagogueDAO extends GenericDAO<Synagogue> {
 			city.addCityAlias(cityAlias);
 			sessionFactory.getCurrentSession().update(city);
 		}
-
-		
 	}
 	
 	public CityDAO getCityDao() {

@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import minyanon.RESTToEntityService;
 import minyanon.address.Address;
 import minyanon.address.AddressUtils;
+import minyanon.address.BadAddressException;
 
 public class SynagogueRESTToEntityService extends RESTToEntityService<SynagogueREST, Synagogue>{
 
@@ -29,9 +30,7 @@ public class SynagogueRESTToEntityService extends RESTToEntityService<SynagogueR
 	}
 	
 	@Transactional
-	public void addNewSynagogue(String synagogueName, String addressStr){
-		
-		//If no address was found in google, throw an exception
+	public void addNewSynagogue(String synagogueName, String addressStr) throws BadAddressException{		
 		Address address = AddressUtils.getAddressFromGoogle(addressStr);
 	
 		synagogueDao.getCityDao().registerNew(address.getCity());
@@ -43,14 +42,16 @@ public class SynagogueRESTToEntityService extends RESTToEntityService<SynagogueR
 		synagogueDao.delete(new Synagogue(synagogueName, new Address(cityName)));
 	}
 
+	@Transactional
 	public SynagogueREST getSynagogue(String synagogueName, String cityName) {
 		Synagogue synagogueFromDB = synagogueDao.getOne(new Synagogue(synagogueName, new Address(cityName)));
 		return new SynagogueREST(synagogueFromDB);
 	}
 
-	public List<SynagogueREST> getSynagoguesInArea(int location, int radius) {
+	@Transactional
+	public List<SynagogueREST> getSynagoguesInArea(double latitude, double longtitude, int radius) {
 		List<SynagogueREST> synagogueRestList = new LinkedList<SynagogueREST>();
-		for(Synagogue synagogue : synagogueDao.getSynagoguesInArea(location, radius)){
+		for(Synagogue synagogue : synagogueDao.getSynagoguesInArea(latitude, longtitude, radius)){
 			synagogueRestList.add(new SynagogueREST(synagogue));
 		}
 		return synagogueRestList;
