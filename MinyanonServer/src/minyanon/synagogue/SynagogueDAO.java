@@ -1,6 +1,9 @@
 package minyanon.synagogue;
 
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.persistence.EntityExistsException;
 
@@ -32,12 +35,14 @@ class SynagogueDAO extends GenericDAO<Synagogue>{
 
 	@SuppressWarnings("unchecked")
 	List<Synagogue> getSynagoguesInArea(double latitude, double longtitude, int radius) {
-		return (List<Synagogue>)sessionFactory.getCurrentSession()
+		List<Entry<Integer, Synagogue>> distanceToSynagogue = new LinkedList<Entry<Integer, Synagogue>>(); 
+		List list = Arrays.copyOfRange(sessionFactory.getCurrentSession()
 				.createSQLQuery("call geodist(:latitude ,:longtitude, :dist)")
 				.setParameter("latitude", latitude)
 				.setParameter("longtitude", longtitude)
 				.setParameter("dist", radius)
-				.list();
+				.list().toArray(), 0,4);
+		return null;
 	}
 	
 	@SuppressWarnings("unchecked")
