@@ -12,5 +12,3 @@ DELIMITER//
   having distance <= dist ORDER BY Distance;
   END
 //DELIMITER ;
-
-call geodist(1 ,11, 0)

@@ -4,20 +4,15 @@ package minyanon.synagogue;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.NaturalId;
 
 import minyanon.AbstractEntity;
 import minyanon.address.Address;
 import minyanon.prayer.Prayer;
-
-import org.hibernate.annotations.NaturalId;
 
 @Entity
 public class Synagogue extends AbstractEntity implements Serializable{

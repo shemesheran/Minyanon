@@ -9,5 +9,7 @@ class ArvitDAO extends PrayerDAO<Arvit> {
 	public ArvitDAO(SessionFactory sessionFactory) {
 		super(Arvit.class, sessionFactory);
 	}
+	
+	
 
 }

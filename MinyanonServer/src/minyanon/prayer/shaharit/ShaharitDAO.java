@@ -10,10 +10,4 @@ class ShaharitDAO extends PrayerDAO<Shaharit>{
 			super(Shaharit.class, sessionFactory);
 		}
 		
-
-		@Override
-		public void newPrayer(Shaharit shaharit) {
-			sessionFactory.getCurrentSession().save(getEntityWithAttachedDependencies(shaharit));
-		}
-
 	}

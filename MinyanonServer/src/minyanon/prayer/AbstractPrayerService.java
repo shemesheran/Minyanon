@@ -10,7 +10,6 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import minyanon.RESTToEntityService;
-import minyanon.synagogue.SynagogueREST;
 
 public abstract class AbstractPrayerService<E extends Prayer> extends RESTToEntityService<PrayerREST, E>{
 

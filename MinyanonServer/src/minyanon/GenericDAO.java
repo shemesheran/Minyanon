@@ -2,8 +2,6 @@ package minyanon;
 
 import java.io.Serializable;
 
-import minyanon.address.Address;
-
 import org.hibernate.SessionFactory;
 
 public abstract class GenericDAO<E extends Serializable> {
@@ -20,13 +18,11 @@ public abstract class GenericDAO<E extends Serializable> {
 		HQL_NaturalIDWhereClause = createNaturalIDWhereClause();
 	}
 
-	public void registerNew(E entity) {
-		sessionFactory.getCurrentSession().save(
-				getEntityWithAttachedDependencies(entity));
+	public void registerNew(E entity) throws EntityNotFoundException {
+		sessionFactory.getCurrentSession().persist(entity);
 	}
-
 	
-	public void delete(E entity){
+	public void delete(E entity) throws EntityNotFoundException {
 		sessionFactory.getCurrentSession().createQuery("delete " + sessionFactory.getClassMetadata(type).getEntityName() +" "
 				+ HQL_NaturalIDWhereClause)
 				.setProperties(getEntityWithAttachedDependencies(entity))
@@ -34,20 +30,14 @@ public abstract class GenericDAO<E extends Serializable> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	//Not worrying about few results, I trust Hibernate's natural ID
-	public E getOne(E entity){
-		return (E) sessionFactory.getCurrentSession().createQuery("from " + sessionFactory.getClassMetadata(type).getEntityName() +" "
-				+ HQL_NaturalIDWhereClause)
-				.setProperties(getEntityWithAttachedDependencies(entity))
-				.uniqueResult();
-	}
-	
+	public abstract E getByNaturalIDs(E entity); 	
 	/**
 	 * Getting an entity and making its dependencies persistent
-	 * @param the Transient entity
-	 * @return the prayer with a persistent dependencies
+	 * @param The transient entity
+	 * @return The prayer with a persistent dependencies
+	 * @throws EntityNotFoundException 
 	 */
-	protected abstract E getEntityWithAttachedDependencies(E entity);
+	protected abstract E getEntityWithAttachedDependencies(E entity) throws EntityNotFoundException;
 
 	/**
 	 * Get the HQL where clause composed by the natural ID fields only

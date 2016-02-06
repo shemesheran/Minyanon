@@ -10,10 +10,4 @@ class MinchaDAO extends PrayerDAO<Mincha> {
 		super(Mincha.class, sessionFactory);
 	}
 
-	@Override
-	public void newPrayer(Mincha prayer) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

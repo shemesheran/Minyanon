@@ -1,7 +1,5 @@
 package minyanon.address;
 
-import javax.transaction.Transactional;
-
 public class AddressService {
 
 //	private final AddressDAO addressDao;

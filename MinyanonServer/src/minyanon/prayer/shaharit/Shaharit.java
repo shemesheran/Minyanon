@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 
-import minyanon.address.Address;
 import minyanon.prayer.Prayer;
 import minyanon.synagogue.Synagogue;
 

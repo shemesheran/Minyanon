@@ -8,11 +8,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import minyanon.AbstractEntity;
-import minyanon.address.Address;
-import minyanon.synagogue.Synagogue;
-
 import org.hibernate.annotations.NaturalId;
+
+import minyanon.AbstractEntity;
+import minyanon.synagogue.Synagogue;
 
 @SuppressWarnings("serial")
 @Entity

@@ -3,7 +3,8 @@ package minyanon.address;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.NaturalId;
 
 import minyanon.address.city.City;
 
@@ -12,7 +13,7 @@ public class Address implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToOne
+	@NaturalId
 	private City city;
 	
 	private String streetName;
